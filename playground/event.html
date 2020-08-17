@@ -20,6 +20,12 @@
  <button class="buy">Buy Item 9</button>
  <button class="buy">Buy Item 10</button>
 
+
+ <!--Add image and add listener for mouseover, Also bubble the event to Window object
+    Also listen mouseenter event and trigger it is capture phase and stop event propogation
+    console log the event target, type, bubbles
+-->
+    <img class="image" src="https://picsum.photos/200" alt ="image loading"/>
  <script>
      const buyButtons = document.querySelectorAll('.buy');
      
@@ -32,6 +38,41 @@
      }
 
      buyButtons.forEach(attachEventClickListener);
+
+     const image = document.querySelector('.image');
+
+    //  function handleMouseOver(event) {
+    //      console.log('handling mouse over');
+    //      console.log(event.target);
+    //      console.log(event.currentTarget);
+    //  }
+
+     function handleMouseEnterImage(event) {
+        console.log('Entered Image ' + event.bubbles);       
+         
+    }
+
+    function handleMouseEnterWindow(event) {
+        console.log('Entered Window ' + event.bubbles);
+         
+    }
+
+    function handleMouseOverImage(event) {
+        console.log('Over Image ' + event.bubbles);
+        event.stopPropagation();
+         
+    }
+
+    function handleMouseOverWindow(event) {
+        console.log('Over Window ' + event.bubbles);
+         
+    }
+
+      image.addEventListener('mouseover', handleMouseOverImage);
+      window.addEventListener('mouseover', handleMouseOverWindow);
+
+     image.addEventListener('mouseenter', handleMouseEnterImage);
+     window.addEventListener('mouseenter', handleMouseEnterWindow, {capture: true});
 
  </script>
 </body>
