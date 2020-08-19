@@ -2,7 +2,7 @@ const cardButtons = document.querySelectorAll('.card button');
 const modalOuter = document.querySelector(".modal-outer");
 const innerModal = document.querySelector('.modal-inner');
 
-function handleClick(e) {
+function handleCardButtonClick(e) {
     const button = e.currentTarget;
     const cards = button.closest('.card');
     const imageSrc = cards.querySelector('img').src;
@@ -11,10 +11,30 @@ function handleClick(e) {
     //Add th info to modal
     innerModal.innerHTML = `
         <img src=${imageSrc.replace(200, 600)} alt="${name}">
-        <h2>${description}</h2>
+        <p>${description}</p>
     `;
 
     modalOuter.classList.add('open');
 }
 
-cardButtons.forEach(cardButton => cardButton.addEventListener('click', handleClick));
+function closeModal() {
+    modalOuter.classList.remove('open');
+}
+
+function handleModalOuterClick(event){
+    const isOutSide = !event.target.closest('.modal-inner');
+    
+    if(isOutSide) {
+        closeModal();
+    }
+}
+
+cardButtons.forEach(cardButton => cardButton.addEventListener('click', handleCardButtonClick));
+modalOuter.addEventListener('click', handleModalOuterClick);
+
+window.addEventListener('keydown', (event) => {
+    
+    if(event.key === 'Escape'){
+        closeModal();
+    }
+});
