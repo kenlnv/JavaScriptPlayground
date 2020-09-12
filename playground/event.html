@@ -19,22 +19,23 @@
  <button class="buy">Buy Item 8</button>
  <button class="buy">Buy Item 9</button>
  <button class="buy">Buy Item 10</button>
-
+ <button class="buy">Buy item 12</button>
 
  <!--Add image and add listener for mouseover, Also bubble the event to Window object
-    Also listen mouseenter event and trigger it is capture phase and stop event propogation
+    Also listen mouseenter event and trigger it is capture phase and stop event propagation
     console log the event target, type, bubbles
 -->
     <img class="image" src="https://picsum.photos/200" alt ="image loading"/>
  <script>
      const buyButtons = document.querySelectorAll('.buy');
      
-     function handleBuyButtonClick(e) {
+     function handleBuyButtonClick() {
          alert('Good choice ' + this.innerHTML);
      }
 
      function attachEventClickListener(button) {
          button.addEventListener('click', handleBuyButtonClick);
+         button.addEventListener('hover', handleBuyButtonClick);
      }
 
      buyButtons.forEach(attachEventClickListener);
